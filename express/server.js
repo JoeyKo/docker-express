@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 router.use(function (req, res, next) {
-  console.log('Something is happening.');
+  console.log('xx Something is happening.');
   next();
 });
 
