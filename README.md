@@ -1,9 +1,11 @@
 # express-mongo
 
-1. First
+1. `docker pull node`
 
-`docker-compose build`
+2. `docker-compose build`
 
-2. Then
+3. `docker-compose run`
 
-`docker-compose run`
+4. docker exec
+
+5. `node express/server.js`
