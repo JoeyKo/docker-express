@@ -1,12 +1,20 @@
 const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Bear = require('./models/bear');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
+// mongodb
 const config = require('./db');
+
+// routes
+const routes = require('./routes');
+const bears = require('./routes/bears');
+
+// port config
 const PORT = 4000;
-const router = express.Router();
+
+const app = express();
 
 mongoose.connect(config.DB, function(err, db) {
   if (err) {
@@ -16,78 +24,29 @@ mongoose.connect(config.DB, function(err, db) {
   }
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-router.use(function (req, res, next) {
-  console.log('xx Something is happening.');
-  next();
+app.use('/api', routes, bears);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-router.get('/', function (req, res) {
-  res.json({ message: '老铁，欢迎你。' });
+// error handler
+// no stacktraces leaked to user unless in development environment
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: (app.get('env') === 'development') ? err : {}
+  });
 });
-
-router.route('/bear')
-  .post(function (req, res) {
-    let bear = new Bear();
-    bear.name = req.body.name;
-
-    bear.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'Bear created' });
-    });
-  })
-
-  .get(function (req, res) {
-    Bear.find(function (err, bears) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(bears);
-    });
-  });
-
-router.route('/bear/:bear_id')
-  .get(function (req, res) {
-    Bear.findById(req.params.bear_id, function (err, bear) {
-      if(err) {
-        res.send(err);
-      }
-      res.json(bear);
-    });
-  })
-
-  .put(function (req, res) {
-    Bear.findById(req.params.bear_id, function(err, bear) {
-      if (err) {
-        res.send(err);
-      }
-      bear.name = req.body.name;
-
-      bear.save(function(err) {
-        if (err) {
-          res.send(err);
-        }
-        res.json({ message: 'Bear updated!' });
-      });
-    });
-  })
-
-  .delete(function(req, res) {
-    Bear.remove({
-      _id: req.params.bear_id
-    }, function(err, bear) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'Successfully deleted' });
-    });
-  });
-
-app.use('/api', router);
 
 app.listen(PORT, function () {
   console.log('Server is running on PORT: ', PORT);
