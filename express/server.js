@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 // mongodb
 const config = require('./db');
 
+mongoose.connect(config.DB);
+
 // routes
 const routes = require('./routes');
 const bears = require('./routes/bears');
@@ -16,12 +18,11 @@ const PORT = 4000;
 
 const app = express();
 
-mongoose.connect(config.DB, function(err, db) {
-  if (err) {
-    console.log('database is not connected');
-  } else {
-    console.log('database is connected');
-  }
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', function () {
+  console.log('mongodb is connected!');
 });
 
 app.use(logger('dev'));
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/api', routes, bears);
+app.use('/api', [routes, bears]);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
