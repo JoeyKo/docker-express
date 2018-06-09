@@ -1,19 +1,28 @@
 version: "3"
 services:
+  nginx:
+    image: nginx
+    container_name: joey-nginx
+    ports:
+    - "80:80"
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+    - app
   app:
-    container_name: app
+    image: app
+    container_name: joey-app
     restart: always
     build: .
     ports:
     - "4000:4000"
     volumes:
     - ~/express-mongo/express:/app/express
-    links: 
+    depends_on: 
     - mongo
     tty: true
   mongo:
-    container_name: mongo
     image: mongo
+    container_name: joey-mongo
     ports: 
     - "27017:27017"
-    tty: true

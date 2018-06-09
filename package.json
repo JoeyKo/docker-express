@@ -1,4 +1,13 @@
 {
+  "name": "joey-app",
+  "version": "1.0.0",
+  "author": "joey",
+  "license": "ISC",
+  "description": "express + mongo + nginx in docker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoeyKo/express-mongo.git"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
