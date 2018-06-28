@@ -36,7 +36,10 @@ app.use(cookieParser());
 app.use('/api', [routes, bears]);
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    console.log(msg);
+    io.emit('chat message', msg);
+  });
 
   socket.on("disconnect", () => {
     console.log("a user go out");
