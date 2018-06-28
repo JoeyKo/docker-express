@@ -4,6 +4,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+const app = express();
+
 // mongodb
 const config = require('./db');
 
@@ -16,7 +18,8 @@ const bears = require('./routes/bears');
 // port config
 const PORT = 4000;
 
-const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 const db = mongoose.connection;
 
@@ -31,6 +34,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api', [routes, bears]);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on("disconnect", () => {
+    console.log("a user go out");
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,7 +60,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(PORT, function () {
+server.listen(PORT, function () {
   console.log('Server is running on PORT: ', PORT);
 });
-
