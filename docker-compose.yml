@@ -1,14 +1,10 @@
 version: "3"
 services:
-  nginx:
-    image: nginx
-    container_name: joey-nginx
-    ports:
-    - "80:80"
-    volumes:
-    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-    - app
+  mongo:
+    image: mongo
+    container_name: joey-mongo
+    ports: 
+    - "27017:27017"
   app:
     image: app
     container_name: joey-app
@@ -21,8 +17,10 @@ services:
     depends_on: 
     - mongo
     tty: true
-  mongo:
-    image: mongo
-    container_name: joey-mongo
-    ports: 
-    - "27017:27017"
+  nginx:
+    image: nginx
+    container_name: joey-nginx
+    ports:
+    - "80:80"
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
