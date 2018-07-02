@@ -24,5 +24,7 @@ services:
   mongo:
     image: mongo
     container_name: joey-mongo
+    volumes:
+    - ~/mongodb/db:/data/db
     ports: 
     - "27017:27017"

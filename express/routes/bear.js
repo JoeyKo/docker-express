@@ -11,7 +11,7 @@ router.route('/bear')
 
     bear.save(function (err) {
       if (err) {
-        res.status(400);
+        res.status(500);
         res.send(err);
         return;
       };
@@ -28,7 +28,7 @@ router.route('/bear')
     });
   });
 
-  router.route('/bear/:bear_id')
+router.route('/bear/:bear_id')
   .get(function (req, res) {
     Bear.findById(req.params.bear_id, function (err, bear) {
       if(err) res.send(err);

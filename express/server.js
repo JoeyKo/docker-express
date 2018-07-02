@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 
@@ -13,7 +13,8 @@ mongoose.connect(config.DB);
 
 // routes
 const routes = require('./routes');
-const bears = require('./routes/bears');
+const bear = require('./routes/bear');
+const user = require('./routes/user');
 
 // port config
 const PORT = 4000;
@@ -31,9 +32,13 @@ db.once('open', function () {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(session({
+  secret: 'joeyko',
+  resave: false,
+  saveUninitialized: true
+}))
 
-app.use('/api', [routes, bears]);
+app.use('/api', [routes, bear, user]);
 
 io.on('connection', (socket) => {
   socket.on('chat message', function(msg){
