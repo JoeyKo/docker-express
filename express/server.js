@@ -7,7 +7,7 @@ const session = require('express-session');
 const app = express();
 
 // mongodb
-const config = require('./db');
+const config = require('./config');
 
 mongoose.connect(config.DB);
 
@@ -15,9 +15,6 @@ mongoose.connect(config.DB);
 const routes = require('./routes');
 const bear = require('./routes/bear');
 const user = require('./routes/user');
-
-// port config
-const PORT = 4000;
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -68,6 +65,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-server.listen(PORT, function () {
-  console.log('Server is running on PORT: ', PORT);
+server.listen(config.PORT, function () {
+  console.log('Server is running on PORT: ', config.PORT);
 });
