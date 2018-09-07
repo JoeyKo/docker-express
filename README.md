@@ -1,3 +1,6 @@
 # express-mongo
 
-express mongo redis nginx
+- express 
+- mongo 
+- redis 
+- nginx
