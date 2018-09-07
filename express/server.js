@@ -6,9 +6,10 @@ const session = require('express-session');
 
 const app = express();
 
-// mongodb
+// mongodb config
 const config = require('./config');
 
+// mongodb connection
 mongoose.connect(config.DB);
 
 // routes
@@ -17,6 +18,8 @@ const bear = require('./routes/bear');
 const user = require('./routes/user');
 
 const server = require('http').Server(app);
+
+// socket.io support
 const io = require('socket.io')(server);
 
 const db = mongoose.connection;
@@ -32,8 +35,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   secret: 'joeyko',
   resave: false,
-  saveUninitialized: true
-}))
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 60000,
+  },
+}));
 
 app.use('/api', [routes, bear, user]);
 

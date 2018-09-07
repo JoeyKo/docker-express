@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
 
   res.json({ isLogined: isLogined, 
     name: loginUser || '', 
-    message: '老铁，欢迎你。' 
+    message: 'Hello, welcome to express + mongodb.' 
   });
 });
 

@@ -1,5 +1,3 @@
 # express-mongo
 
-`docker-compose build`
-
-`docker-compose up`
+express mongo redis nginx
