@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 
 const app = express();
 
@@ -32,14 +31,6 @@ db.once('open', function () {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-  secret: 'joeyko',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 60000,
-  },
-}));
 
 app.use('/api', [routes, bear, user]);
 

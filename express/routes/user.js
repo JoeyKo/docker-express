@@ -1,6 +1,8 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user');
+const config = require('../config');
 
 router.route('/user/login')
   .post(function(req, res) {
@@ -22,12 +24,9 @@ router.route('/user/login')
           res.json({ message: 'password is wrong!' });
           return;
         }
-        req.session.regenerate(function(err) {
-          if (err) {
-            return res.json({ message: 'login failed!' })
-          }
-          req.session.loginUser = user.email;
-          res.json({ message: 'login successfully! '});
+        res.json({ message: 'login successfully! ', token: jwt.sign({ 
+          id: user.id,
+          exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60),}, config.JWTSECRET,) 
         });
       });
     });
