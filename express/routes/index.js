@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', isLoggedIn, function (req, res) {
   console.log(req)
   res.json({ 
-    message: 'Hello, welcome to express + mongodb.' 
+    message: 'Hello, You are logged in.' 
   });
 });
 

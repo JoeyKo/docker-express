@@ -2,8 +2,26 @@ const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const { ApolloServer, gql } = require('apollo-server-express');
+
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+  type Query {
+    name: String
+  }
+`;
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    name: () => 'Joey Ko!',
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
+server.applyMiddleware({ app });
 
 // mongodb config
 const config = require('./config');
@@ -16,10 +34,8 @@ const routes = require('./routes');
 const bear = require('./routes/bear');
 const user = require('./routes/user');
 
-const server = require('http').Server(app);
-
 // socket.io support
-const io = require('socket.io')(server);
+// const io = require('socket.io')(server);
 
 const db = mongoose.connection;
 
@@ -34,16 +50,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', [routes, bear, user]);
 
-io.on('connection', (socket) => {
-  socket.on('chat message', function(msg){
-    console.log(msg);
-    io.emit('chat message', msg);
-  });
+// io.on('connection', (socket) => {
+//   socket.on('chat message', function(msg){
+//     console.log(msg);
+//     io.emit('chat message', msg);
+//   });
 
-  socket.on("disconnect", () => {
-    console.log("a user go out");
-  });
-});
+//   socket.on("disconnect", () => {
+//     console.log("a user go out");
+//   });
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,6 +78,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-server.listen(config.PORT, function () {
-  console.log('Server is running on PORT: ', config.PORT);
+app.listen(config.PORT, function () {
+  console.log(`🚀 Server ready at http://localhost:${config.PORT}${server.graphqlPath}`)
 });
