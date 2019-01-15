@@ -1,6 +1,7 @@
 # express-mongo
 
-- express 
+- nginx
+- express
+- graphql
 - mongo 
 - redis 
-- nginx
