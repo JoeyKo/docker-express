@@ -2,6 +2,4 @@
 
 - nginx
 - express
-- graphql
 - mongo 
-- redis 
