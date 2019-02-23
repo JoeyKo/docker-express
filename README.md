@@ -1,4 +1,4 @@
-# express-mongo
+# docker-express
 
 - nginx
 - express
