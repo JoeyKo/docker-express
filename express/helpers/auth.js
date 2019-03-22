@@ -10,8 +10,8 @@ exports.isLoggedIn = function(req, res, next) {
       jwt.verify(token, config.JWTSECRET, function(err, decoded) {
           if (err) {
               return res.status(401).send({
-                  success: false,
-                  message: 'Sign in to continue.'
+                  code: 101,
+                  message: 'Your token is expired.'
               });
           } else {
               // if everything is good, save to request for use in other routes
@@ -22,8 +22,8 @@ exports.isLoggedIn = function(req, res, next) {
       // if there is no token
       // return an error
       return res.status(401).send({
-          success: false,
-          message: 'Sign in to continue.'
+          code: 101,
+          message: 'You are not signed in.'
       });
   }
 }

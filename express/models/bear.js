@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 let BearSchema = new Schema({
   name: { 
     type: String, 
+    unique: true,
     required: [true, 'why no name?']
   },
   updated: { type: Date, default: Date.now },

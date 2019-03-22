@@ -1,60 +1,103 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Bear = require('../models/bear');
+const Bear = require("../models/bear");
 
-router.route('/bear')
-  .post(function (req, res) {
-    let bear = new Bear();
-    bear.name = req.body.name;
-    bear.age = req.body.age;
-    bear.living = req.body.living;
+router
+  .route("/bear")
+  .post(function(req, res) {
+    let bear = new Bear(req.body);
 
-    bear.save(function (err) {
+    bear.save(function(err) {
       if (err) {
-        res.status(500);
-        res.send(err);
+        res.json({
+          code: 101,
+          message: err.message
+        });
         return;
-      };
-      
+      }
+
       bear.speak();
-      res.json({ message: 'Bear created' });
+      res.json({
+        code: 100,
+        message: "Bear created",
+        data: bear
+      });
     });
   })
 
-  .get(function (req, res) {
-    Bear.find(function (err, bears) {
+  .get(function(req, res) {
+    Bear.find(function(err, bears) {
       if (err) res.send(err);
       res.json(bears);
     });
   });
 
-router.route('/bear/:bear_id')
-  .get(function (req, res) {
-    Bear.findById(req.params.bear_id, function (err, bear) {
-      if(err) res.send(err);
-      res.json(bear);
+router
+  .route("/bear/:bear_id")
+  .get(function(req, res) {
+    Bear.findById(req.params.bear_id, function(err, bear) {
+      if (err) {
+        res.json({
+          code: 101,
+          message: err.message
+        });
+        return;
+      }
+      res.json({
+        code: 100,
+        message: "",
+        data: bear
+      });
     });
   })
 
-  .put(function (req, res) {
+  .put(function(req, res) {
     Bear.findById(req.params.bear_id, function(err, bear) {
-      if (err) res.send(err);
-      bear.name = req.body.name;
-
+      if (err) {
+        res.json({
+          code: 101,
+          message: err.message
+        });
+        return
+      }
+      bear = Object.assign(bear, req.body);
       bear.save(function(err) {
-        if (err) res.send(err);
-        res.json({ message: 'Bear updated!' });
+        if (err) {
+          res.json({
+            code: 101,
+            message: err.message
+          });
+          return
+        }
+        res.json({ 
+          code: 100,
+          data: bear,
+          message: "Bear updated!" 
+        });
       });
     });
   })
 
   .delete(function(req, res) {
-    Bear.remove({
-      _id: req.params.bear_id
-    }, function(err, bear) {
-      if (err) res.send(err);
-      res.json({ message: 'Successfully deleted' });
-    });
+    Bear.remove(
+      {
+        _id: req.params.bear_id
+      },
+      function(err, bear) {
+        if (err) {
+          res.json({
+            code: 101,
+            message: err.message
+          });
+          return
+        }
+        res.json({ 
+          code: 100,
+          data: {},
+          message: "Successfully deleted" 
+        });
+      }
+    );
   });
 
 module.exports = router;

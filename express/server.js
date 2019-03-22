@@ -1,69 +1,49 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const { ApolloServer, gql } = require('apollo-server-express');
-
-// Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  type Query {
-    name: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    name: () => 'Joey Ko!',
-  },
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
+const express = require("express");
+const mongoose = require("mongoose");
+const logger = require("morgan");
+const redis = require("redis");
 
 const app = express();
-server.applyMiddleware({ app });
 
 // mongodb config
-const config = require('./config');
+const config = require("./config");
 
 // mongodb connection
-mongoose.connect(config.DB);
-
-// routes
-const routes = require('./routes');
-const bear = require('./routes/bear');
-const user = require('./routes/user');
-
-// socket.io support
-// const io = require('socket.io')(server);
+mongoose.set('useCreateIndex', true)
+mongoose.connect(config.DB, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', function () {
-  console.log('mongodb is connected!');
+db.on("error", function(err) {
+  console.log("mongodb connection error: ", err);
+});
+db.once("open", function() {
+  console.log("mongodb is connected!");
 });
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+const client = redis.createClient({
+  host: "redis"
+});
+client.on("error", function(err) {
+  console.log("redis connection error: ", err);
+});
+client.on("connect", function() {
+  console.log("redis is connected!");
+});
 
-app.use('/api', [routes, bear, user]);
+app.use(logger("dev"));
+app.use(express.json());
 
-// io.on('connection', (socket) => {
-//   socket.on('chat message', function(msg){
-//     console.log(msg);
-//     io.emit('chat message', msg);
-//   });
+// routes
+const routes = require("./routes");
+const bear = require("./routes/bear");
+const user = require("./routes/user");
 
-//   socket.on("disconnect", () => {
-//     console.log("a user go out");
-//   });
-// });
+app.use("/api", [routes, bear, user]);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -72,12 +52,12 @@ app.use(function(req, res, next) {
 // no stacktraces leaked to user unless in development environment
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.render("error", {
     message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
+    error: app.get("env") === "development" ? err : {}
   });
 });
 
-app.listen(config.PORT, function () {
-  console.log(`🚀 Server ready at http://localhost:${config.PORT}${server.graphqlPath}`)
+app.listen(config.PORT, function() {
+  console.log(`🚀 Server ready at http://localhost:${config.PORT}`);
 });
