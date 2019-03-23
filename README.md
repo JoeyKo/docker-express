@@ -2,4 +2,5 @@
 
 - nginx
 - express
+- redis
 - mongo 
