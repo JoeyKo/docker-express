@@ -9,7 +9,7 @@
     "url": "https://github.com/JoeyKo/express-mongo.git"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon express/server.js"
+    "start": "cross-env NODE_ENV=development nodemon -L express/server.js"
   },
   "dependencies": {
     "cross-env": "^5.2.0",
