@@ -10,18 +10,18 @@ const config = require("./config");
 
 // mongodb connection
 mongoose.set('useCreateIndex', true)
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(config.MONGODB, { useNewUrlParser: true });
 
-const db = mongoose.connection;
+mongodb = mongoose.connection;
 
-db.on("error", function(err) {
+mongodb.on("error", function(err) {
   console.log("mongodb connection error: ", err);
 });
-db.once("open", function() {
+mongodb.once("open", function() {
   console.log("mongodb is connected!");
 });
 
-const client = redis.createClient({
+client = redis.createClient({
   host: "redis"
 });
 client.on("error", function(err) {
