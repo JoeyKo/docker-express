@@ -6,7 +6,7 @@ const redis = require("redis");
 const app = express();
 
 // mongodb config
-const config = require("./config");
+const config = require("./express/config");
 
 // mongodb connection
 mongoose.set('useCreateIndex', true)
@@ -35,9 +35,9 @@ app.use(logger("dev"));
 app.use(express.json());
 
 // routes
-const routes = require("./routes");
-const bear = require("./routes/bear");
-const user = require("./routes/user");
+const routes = require("./express/routes");
+const bear = require("./express/routes/bear");
+const user = require("./express/routes/user");
 
 app.use("/api", [routes, bear, user]);
 
