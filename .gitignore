@@ -1,1 +1,4 @@
 /node_modules
+
+# file upload folder
+/uploads

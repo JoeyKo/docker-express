@@ -2,12 +2,11 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const redis = require("redis");
-const router = express.Router();
-const { promisify } = require("util");
 const User = require("../models/user");
 const config = require("../config");
+const { promisify } = require("util");
 
-const getAsync = promisify(client.get).bind(client);
+const router = express.Router();
 
 router.route("/user/login").post(async (req, res) => {
   try {
@@ -21,6 +20,8 @@ router.route("/user/login").post(async (req, res) => {
       res.json({ code: 101, message: "password is wrong!" });
       return;
     }
+    const getAsync = promisify(client.get).bind(client);
+
     getAsync(user.id).then(function(res) {
       console.log(res); // => 'bar'
     });

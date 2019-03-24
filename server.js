@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const redis = require("redis");
+const routes = require("./express/routes");
 
 const app = express();
 
@@ -35,11 +36,7 @@ app.use(logger("dev"));
 app.use(express.json());
 
 // routes
-const routes = require("./express/routes");
-const bear = require("./express/routes/bear");
-const user = require("./express/routes/user");
-
-app.use("/api", [routes, bear, user]);
+app.use("/api", routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

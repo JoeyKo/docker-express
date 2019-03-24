@@ -7,7 +7,6 @@ let BearSchema = new Schema({
     unique: true,
     required: [true, 'why no name?']
   },
-  updated: { type: Date, default: Date.now },
   age: { 
     type: Number, 
     min: [18, 'Too young'], 

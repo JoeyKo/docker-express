@@ -20,7 +20,7 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ~/docker-express/express:/app/express
+      - .:/app
       - /app/node_modules
     command: /usr/local/wait-for-it.sh mongo:27017 -- npm start
     depends_on:
