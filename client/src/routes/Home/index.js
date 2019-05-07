@@ -1,5 +1,5 @@
 import React from 'react';
-import TabBar from 'components/TabBar';
+import Navigation from 'components/Navigation';
 import styles from './index.scss';
 
 import { home } from 'services/api';
@@ -14,7 +14,7 @@ export default class HomePage extends React.PureComponent {
   render() {
     return (
       <div className={styles.root}>
-        <TabBar />
+        <Navigation />
       </div>
     )
   }
