@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import Navigation from 'components/Navigation';
+import { home } from 'services/api';
 import styles from './index.scss';
 
-import { home } from 'services/api';
 
 export default function HomePage() {
 
   useEffect(() => {
     home().then(data => {
+      // eslint-disable-next-line no-console
       console.log(data)
     })
   })
