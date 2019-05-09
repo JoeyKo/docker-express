@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import Navigation from 'components/Navigation';
 import { home } from 'services/api';
-import styles from './index.scss';
-
+import styles from './Home.module.scss';
 
 export default function HomePage() {
 
@@ -15,7 +13,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.root}>
-      <Navigation />
+     
     </div>
   )
 }
