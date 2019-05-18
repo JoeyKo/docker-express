@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Search from 'components/Search';
 import styles from "./Navigation.module.scss";
 
 export default function Navigation({ links }) {
@@ -32,6 +33,9 @@ export default function Navigation({ links }) {
             </Link>
           ))}
         </nav>
+        <div className={styles.search}>
+          <Search />
+        </div>
       </div>
     </header>
   );

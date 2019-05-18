@@ -1,0 +1,32 @@
+.inputWrapper {
+  position: relative;
+  display: flex;
+  width: 180px;
+  height: 34px;
+  padding: 4px 10px;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  box-sizing: border-box;
+  transition: background 0.2s, border 0.2s;
+}
+
+.inputWrapper.isFocus {
+  background: #fff;
+  border: 1px solid #8590a6;
+}
+
+.searchBarInput {
+  width: 326px;
+  padding-left: 16px;
+  transition: width 0.2s ease, background 0.3s ease;
+}
+
+.searchBarInput.focusedInput {
+  width: 400px;
+}
+
+.inputWrapperGrey {
+  background: #f6f6f6;
+}

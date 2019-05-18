@@ -1,0 +1,21 @@
+input.input {
+  color: #1a1a1a;
+  height: 24px;
+  line-height: 24px;
+}
+
+.input {
+  flex: 1 1;
+  padding: 0;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background: transparent;
+  border: none;
+  resize: none;
+}
+
+.input:focus {
+  outline: none;
+}
