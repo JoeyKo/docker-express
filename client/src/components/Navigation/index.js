@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Search from 'components/Search';
+import SearchBar from 'components/SearchBar';
 import styles from "./Navigation.module.scss";
 
-export default function Navigation({ links }) {
+export default function Navigation({ links, placeholder, onSearch }) {
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
@@ -33,8 +33,8 @@ export default function Navigation({ links }) {
             </Link>
           ))}
         </nav>
-        <div className={styles.search}>
-          <Search />
+        <div className={styles.searchBar}>
+          <SearchBar placeholder={placeholder} onSearch={onSearch} />
         </div>
       </div>
     </header>

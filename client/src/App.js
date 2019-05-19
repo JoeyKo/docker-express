@@ -13,10 +13,14 @@ const links = [
 ];
 
 function App() {
+
+  const handleSearch = (event) => {
+    console.log(event)
+  }
   return (
     <Router>
       <Suspense fallback={<PageLoading />}>
-        <Navigation links={links} />
+        <Navigation links={links} placeholder="iG 不敌TL 无缘 MSI 决赛" onSearch={handleSearch} />
         <main className={StyleSheet.main}>
           <div className={styles.mainContainer}>
             <Switch>
