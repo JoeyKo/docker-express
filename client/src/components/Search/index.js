@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import Input from "../Input";
+import Input from "components/Input";
+import SearchButton from './SearchButton'
 import styles from "./Search.module.scss";
 
 function Search(props) {
@@ -25,6 +26,9 @@ function Search(props) {
         onBlur={() => setFocus(false)} 
         placeholder="iG 不敌TL 无缘 MSI 决赛" 
       />
+      <div className={styles.inputAfter}>
+        <SearchButton />
+      </div>
     </div>
   );
 }
