@@ -11,3 +11,12 @@
   - description
   - tags
   - birthday
+
+# Technology stack
+- front 
+  - Next.js
+  - TypeScript
+  - Apollo-client
+- server
+  - PostgreSQL
+  - Apollo-server
