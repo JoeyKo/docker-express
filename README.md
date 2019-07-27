@@ -11,9 +11,3 @@
   - description
   - tags
   - birthday
-
-# Technology stack
-- nginx
-- express
-- redis
-- mongo 
