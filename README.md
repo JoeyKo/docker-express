@@ -13,6 +13,8 @@
   - birthday
 
 # Technology stack
+- Docker
+
 - front 
   - Next.js
   - TypeScript

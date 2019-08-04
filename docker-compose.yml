@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  api:
+    build:
+      context: .
+      target: api
+    environment:
+      - DATABASE_URL=postgres://zhihuclone:zhihuclone@db:5432/dev_zhihuclone
+    ports:
+      - '4100:4100'
+    depends_on:
+      - db
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    networks:
+      - app-network
+
+  db:
+    image: postgres:11.4-alpine
+    environment:
+      - POSTGRES_USER=zhihuclone
+      - POSTGRES_PASSWORD=zhihuclone
+      - POSTGRES_DB=dev_zhihuclone
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
