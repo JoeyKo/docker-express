@@ -4,9 +4,9 @@ FROM node:10.16.1-alpine as node_base
 FROM node_base as web_deps
 WORKDIR /app
 COPY packages/client/package.json ./packages/client/package.json
-COPY packages/client/yarn.lock ./packages/client/yarn.lock
+# COPY packages/client/yarn.lock ./packages/client/yarn.lock
 WORKDIR /app/packages/client
-RUN yarn install
+RUN npm install
 
 # === web stage ===
 FROM node_base as web
@@ -21,9 +21,9 @@ CMD /bin/sh -c "cd packages/client && yarn dev"
 FROM node_base as server_deps
 WORKDIR /app
 COPY packages/server/package.json ./packages/server/package.json
-COPY packages/server/yarn.lock ./packages/server/yarn.lock
+# COPY packages/server/yarn.lock ./packages/server/yarn.lock
 WORKDIR /app/server/packages
-RUN yarn install
+RUN npm install
 
 # === api stage ===
 FROM node_base as api
