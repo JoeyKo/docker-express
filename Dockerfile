@@ -1,4 +1,4 @@
-FROM 10.16.1-alpine as node_base
+FROM node:10.16.1-alpine as node_base
 
 # === WEB deps stage ===
 FROM node_base as web_deps
