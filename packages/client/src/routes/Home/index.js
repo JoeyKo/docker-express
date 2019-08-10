@@ -1,12 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import Card from "components/Card";
-import cover from '../../assets/images/v2-ba0ca8a1ee3b92d76b1758e07e98be13_b.jpg'
+import Loading from 'components/Loading'
+import cover from '../../assets/images/v2-ba0ca8a1ee3b92d76b1758e07e98be13_b.jpg';
+
 import styles from "./Home.module.scss";
 
-export default function HomePage() {
-  useEffect(() => {
-   
-  }, []);
+function HomePage() {
+
+  const { loading, error, data } = useQuery(gql`
+    {
+      rates(currency: "USD") {
+        currency
+        rate
+      }
+    }
+  `)
+
+  if (loading) return <Loading />
+  if (error) return <p>Error :(</p>
 
   return (
     <div className={styles.mainColumn}>
@@ -19,6 +32,13 @@ export default function HomePage() {
 "
         />
       </div>
+      {data.rates.map(({ currency, rate}) => (
+        <div key={currency}>
+          {currency}: { rate}
+        </div>
+      ))}
     </div>
   );
 }
+
+export default HomePage;
