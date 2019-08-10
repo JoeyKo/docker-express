@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
-import { home } from "services/api";
 import Card from "components/Card";
 import cover from '../../assets/images/v2-ba0ca8a1ee3b92d76b1758e07e98be13_b.jpg'
 import styles from "./Home.module.scss";
 
 export default function HomePage() {
   useEffect(() => {
-    home().then(data => {
-      // eslint-disable-next-line no-console
-      console.log(data);
-    });
-  });
+   
+  }, []);
 
   return (
     <div className={styles.mainColumn}>

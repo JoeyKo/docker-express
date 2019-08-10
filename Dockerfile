@@ -22,7 +22,7 @@ FROM node_base as server_deps
 WORKDIR /app
 COPY packages/server/package.json ./packages/server/package.json
 # COPY packages/server/yarn.lock ./packages/server/yarn.lock
-WORKDIR /app/server/packages
+WORKDIR /app/packages/server
 RUN npm install
 
 # === api stage ===
