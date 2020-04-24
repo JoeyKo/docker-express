@@ -16,7 +16,7 @@ interface Props {
 export default function Navigation({ links, placeholder, onSearch }: Props) {
   return (
     <header className="header">
-      <div className="headerInner">
+      <div className="header-inner">
         <Link href="/">
           <svg
             viewBox="0 0 200 91"
@@ -55,10 +55,11 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
           min-width: 1032px;
           overflow: hidden;
           background: #fff;
-          box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+          box-shadow: 0 1px 3px rgba(26,26,26,.1);
+          background-clip: content-box;
         }
 
-        .headerInner {
+        .header-inner {
           position: relative;
           display: flex;
           width: 1000px;
@@ -66,6 +67,7 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
           padding: 0 16px;
           margin: 0 auto;
           align-items: center;
+          transition: transform .3s;
         }
 
         .iconLogo {

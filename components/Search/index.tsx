@@ -54,6 +54,7 @@ function Search({
         .inputWrapper {
           position: relative;
           display: flex;
+          align-items: center;
           width: 180px;
           height: 34px;
           padding: 4px 10px;
@@ -62,7 +63,7 @@ function Search({
           border: 1px solid #ebebeb;
           border-radius: 3px;
           box-sizing: border-box;
-          transition: background 0.2s, border 0.2s;
+          transition: background .2s,border .2s;
         }
 
         .inputWrapper.isFocus {

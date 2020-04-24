@@ -5,7 +5,7 @@ const links = [
   { name: "首页", link: "/" },
 ];
 
-function Layout({ children, title = 'This is the default title' }) {
+function Layout({ children, title = 'zhihu' }) {
   
   const handleSearch = (event) => {
     console.log(event)
@@ -20,7 +20,6 @@ function Layout({ children, title = 'This is the default title' }) {
       </Head>
       <Navigation links={links} placeholder="iG 不敌TL 无缘 MSI 决赛" onSearch={handleSearch} />
       {children}
-      <footer>{'I`m here to stay'}</footer>
     </div>
   )
 }

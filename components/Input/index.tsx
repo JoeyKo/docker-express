@@ -12,10 +12,12 @@ function Input(props) {
     />
     <style jsx>{`
       input.input {
-        color: #1a1a1a;
-        height: 24px;
-        line-height: 24px;
-
+        flex: 1 1;
+        padding: 0;
+        overflow: hidden;
+        background: transparent;
+        border: none;
+        resize: none;
       }
 
       input.input:focus {
