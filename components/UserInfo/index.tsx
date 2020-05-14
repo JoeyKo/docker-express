@@ -1,9 +1,9 @@
 import React from "react";
 
-function Loading() {
+function UserInfo() {
   return (
     <div>user info</div>
   );
 }
 
-export default Loading;
+export default UserInfo;
