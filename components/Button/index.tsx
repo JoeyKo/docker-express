@@ -49,6 +49,33 @@ function Button({ className, children, disabled, type, color, onClick, props }: 
           color: #0084ff;
           border-color: #0084ff;
         }
+   
+        .searchButton {
+          margin-left: 12px;
+          padding: 0 12px;
+          background: transparent;
+          border-color: transparent;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+      
+        .askButton {
+          z-index: 103;
+          padding: 0 14px;
+          margin-left: 16px;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          line-height: 30px;
+        }
+
+        .askButton:hover {
+          border-color: #0077e6;
+          background-color: #0077e6;
+        }
+
+        .askButton.askHiddenButton {
+          opacity: 0;
+          transform: scale(0);
+        }
      `}</style>
     </button>
   );

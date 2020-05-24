@@ -39,6 +39,7 @@ function HomePage() {
           .Topstory-mainColumnCard {
             box-shadow: 0 1px 3px rgba(26,26,26,.1);
           }
+          
         `}</style>
         <style global jsx>{`
           body {
