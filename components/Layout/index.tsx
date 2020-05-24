@@ -1,14 +1,18 @@
 import Head from 'next/head'
 import Navigation from "../Navigation";
+import router from 'next/router'
 
 const links = [
   { name: "首页", link: "/" },
+  { name: "发现", link: "/explore" },
+  { name: "等你来答", link: "/question/waiting" },
 ];
 
 function Layout({ children, title = 'zhihu' }) {
-  
+
   const handleSearch = (event) => {
     console.log(event)
+    router.push('/search')
   }
 
   return (

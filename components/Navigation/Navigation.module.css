@@ -1,0 +1,43 @@
+.header {
+  position: relative;
+  z-index: 100;
+  min-width: 1032px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+  background-clip: content-box;
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  width: 1000px;
+  height: 52px;
+  padding: 0 16px;
+  margin: 0 auto;
+  align-items: center;
+  transition: transform .3s;
+}
+
+.iconLogo {
+  fill: #0084ff;
+}
+
+.Tabs {
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.AppHeader-Tabs {
+  border-bottom: none;
+  display: flex;
+  margin: 0 23px;
+}
+
+.Tabs-Item {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.AppHeader-Tab {
+  padding: 0 17px;
+}

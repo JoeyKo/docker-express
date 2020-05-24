@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Search from "../Search";
 import Button from "../Button";
 import classNames from 'classnames';
+import styles from './SearchBar.module.css'
 
 interface Props {
   onSearch?: (event: any) => void,
@@ -24,9 +25,9 @@ function SearchBar({ onSearch, placeholder }: Props) {
   }
 
   return (
-    <div className="SearchBar">
-      <div className="SearchBarToolWrapper">
-        <form className="searchBarTool">
+    <div className={styles.SearchBar}>
+      <div className={styles.SearchBarToolWrapper}>
+        <form className={styles.searchBarTool}>
           <Search
             placeholder={placeholder}
             focus={focus}
@@ -41,27 +42,14 @@ function SearchBar({ onSearch, placeholder }: Props) {
         type="primary"
         color="blue"
         className={classNames({
-          askButton: true,
-          askHiddenButton: focus
+          [styles.askButton]: true,
+          [styles.askHiddenButton]: focus
         })}
       >
         提问
       </Button>
       <style jsx>{`
-        .SearchBar {
-          display: flex;
-        }
-        .SearchBarToolWrapper {
-          position: relative;
-          z-index: 104;
-          width: 326px;
-        }
-        
-        .SearchBarTool {
-          position: relative;
-          float: left;
-          overflow: hidden;
-        }
+       
       `}
       </style>
     </div>

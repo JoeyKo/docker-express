@@ -39,19 +39,6 @@ function HomePage() {
           .Topstory-mainColumnCard {
             box-shadow: 0 1px 3px rgba(26,26,26,.1);
           }
-          
-        `}</style>
-        <style global jsx>{`
-          body {
-            font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
-            font-size: 15px;
-            color: #1a1a1a;
-            background: #f6f6f6;
-            -webkit-tap-highlight-color: rgba(26,26,26,0);
-          }
-          body, button, p, pre {
-            margin: 0;
-          }
         `}</style>
       </div>
     </Layout>

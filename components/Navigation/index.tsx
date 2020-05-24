@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from '../SearchBar';
+import styled from 'styled-components'
+import classNames from 'classnames'
+import styles from './Navigation.module.css'
 
 type LinkItem = {
   link: string,
@@ -13,14 +16,24 @@ interface Props {
   onSearch: (event: any) => void
 }
 
+const TabLink = styled.a`
+  position: relative;
+  display: inline-block;
+  padding: 14px 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: #8590a6;
+  text-align: center;
+`
+
 export default function Navigation({ links, placeholder, onSearch }: Props) {
   return (
-    <header className="header">
-      <div className="header-inner">
+    <header className={styles.header}>
+      <div className={styles['header-inner']}>
         <Link href="/">
           <svg
             viewBox="0 0 200 91"
-            className="iconLogo"
+            className={styles.iconLogo}
             width="64"
             height="30"
             aria-hidden="true"
@@ -35,70 +48,19 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
             </g>
           </svg>
         </Link>
-        <nav className="nav">
+        <ul className={classNames(styles.Tabs, styles['AppHeader-Tabs'])}>
           {links.map(item => (
-            <span className="navItem" key={item.link}>
-              <Link href={item.link}>
-                {item.name}
-              </Link>
-            </span>
+            <li className={classNames(styles['Tabs-item'], styles['AppHeader-Tab'])} key={item.link}>
+              <TabLink href={item.link}>
+                <span>{item.name}</span>
+              </TabLink>
+            </li>
           ))}
-        </nav>
-        <div className="searchBar">
+        </ul>
+        <div className={styles.searchBar}>
           <SearchBar placeholder={placeholder} onSearch={onSearch} />
         </div>
       </div>
-      <style jsx>{`
-        .header {
-          position: relative;
-          z-index: 100;
-          min-width: 1032px;
-          overflow: hidden;
-          background: #fff;
-          box-shadow: 0 1px 3px rgba(26,26,26,.1);
-          background-clip: content-box;
-        }
-
-        .header-inner {
-          position: relative;
-          display: flex;
-          width: 1000px;
-          height: 52px;
-          padding: 0 16px;
-          margin: 0 auto;
-          align-items: center;
-          transition: transform .3s;
-        }
-
-        .iconLogo {
-          fill: #0084ff;
-        }
-
-        .nav {
-          display: flex;
-          justify-content: space-between;
-          height: 30px;
-          margin-right: 18px;
-          margin-left: 27px;
-          color: #999;
-        }
-
-        .navItem {
-          padding: 0 15px;
-          font-size: 15px;
-          line-height: 30px;
-          color: #8590a6;
-        }
-        
-        .navItem:first-child {
-          padding-left: 0;
-        }
-
-        .navItem.isActive {
-          color: #444;
-        }
-      `}
-      </style>
     </header>
   );
 }

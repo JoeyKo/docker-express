@@ -58,24 +58,6 @@ function Button({ className, children, disabled, type, color, onClick, props }: 
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
         }
-      
-        .askButton {
-          z-index: 103;
-          padding: 0 14px;
-          margin-left: 16px;
-          transition: opacity 0.3s ease, transform 0.3s ease;
-          line-height: 30px;
-        }
-
-        .askButton:hover {
-          border-color: #0077e6;
-          background-color: #0077e6;
-        }
-
-        .askButton.askHiddenButton {
-          opacity: 0;
-          transform: scale(0);
-        }
      `}</style>
     </button>
   );

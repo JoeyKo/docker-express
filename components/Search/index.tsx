@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import Input from "../Input";
 import Button from "../Button";
-import styles from './index.module.css'
+import styles from './Search.module.css'
 
 interface Props {
   onFocus?: () => void,
@@ -25,11 +25,11 @@ function Search({
   return (
     <div
       className={classNames(className, {
-        inputWrapper: true,
-        searchBarInput: true,
-        inputWrapperGrey: true,
-        isFocus: focus,
-        focusedInput: focus
+        [styles.inputWrapper]: true,
+        [styles.searchBarInput]: true,
+        [styles.inputWrapperGrey]: true,
+        [styles.isFocus]: focus,
+        [styles.focusedInput]: focus
       })}
     >
       <Input
@@ -38,7 +38,7 @@ function Search({
         placeholder={placeholder}
         onChange={onChange}
       />
-      <Button type="primary" className="searchButton searchIcon" onClick={onSearch}>
+      <Button type="primary" className={styles.searchButton} onClick={onSearch}>
         <span style={{ display: "inline-flex", alignItems: "center" }}>
           &#8203;
           <svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18">
@@ -49,57 +49,6 @@ function Search({
           </svg>
         </span>
       </Button>
-      <style jsx>{`
-        .inputWrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-          width: 180px;
-          height: 34px;
-          padding: 4px 10px;
-          font-size: 14px;
-          background: #fff;
-          border: 1px solid #ebebeb;
-          border-radius: 3px;
-          box-sizing: border-box;
-          transition: background .2s,border .2s;
-        }
-
-        .inputWrapper.isFocus {
-          background: #fff;
-          border: 1px solid #8590a6;
-        }
-        
-        .searchBarInput {
-          width: 326px;
-          padding-left: 12px;
-          padding-right: 0;
-          transition: width 0.2s ease, background 0.3s ease;
-        }
-        
-        .searchBarInput.focusedInput {
-          width: 400px;
-        }
-        
-        .inputWrapperGrey {
-          background: #f6f6f6;
-        }
-        
-        .searchIcon {
-          position: absolute;
-          right: -11px;
-          top: -17px;
-          bottom: -17px;
-          background: transparent;
-          border: transparent;
-          padding: 0 12px;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
-          transition: fill .3s ease;
-        }
-      `}
-
-      </style>
     </div>
   );
 }
