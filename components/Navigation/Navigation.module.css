@@ -41,3 +41,21 @@
 .AppHeader-Tab {
   padding: 0 17px;
 }
+
+.popoverContent {
+  min-width: 370px;
+  min-height: 60px;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,.15) \9;
+}
+
+.AppHeader-userInfo {
+  flex: 1 1;
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}

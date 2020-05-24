@@ -5,14 +5,17 @@ import classNames from 'classnames';
 import styles from './SearchBar.module.css'
 
 interface Props {
-  onSearch?: (event: any) => void,
+  onSearch?: (event?: any) => void,
+  onFucus?: (event?: string) => void,
+  onChange?: (value: string) => void,
   placeholder?: string,
 }
 
-function SearchBar({ onSearch, placeholder }: Props) {
+function SearchBar({ onSearch, onChange, onFucus, placeholder }: Props) {
   const [focus, setFocus] = useState(false);
 
   const handleFocus = () => {
+    if (typeof onChange === 'function') onFucus()
     setFocus(true);
   };
 
@@ -21,7 +24,7 @@ function SearchBar({ onSearch, placeholder }: Props) {
   };
 
   const handleChange = (event) => {
-    console.log(event.target.value)
+    if (typeof onChange === 'function') onChange(event.target.value)
   }
 
   return (

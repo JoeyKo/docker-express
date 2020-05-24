@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import SearchBar from '../SearchBar';
 import styled from 'styled-components'
 import classNames from 'classnames'
+import Popover from 'react-tiny-popover'
+import SearchBar from '../SearchBar';
+import UserInfo from '../UserInfo'
 import styles from './Navigation.module.css'
 
 type LinkItem = {
@@ -27,6 +29,11 @@ const TabLink = styled.a`
 `
 
 export default function Navigation({ links, placeholder, onSearch }: Props) {
+  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
+
+  const handleSearchChange = (text) => {
+    setIsPopoverOpen(true)
+  }
   return (
     <header className={styles.header}>
       <div className={styles['header-inner']}>
@@ -58,7 +65,34 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
           ))}
         </ul>
         <div className={styles.searchBar}>
-          <SearchBar placeholder={placeholder} onSearch={onSearch} />
+          <Popover
+            isOpen={isPopoverOpen}
+            position={['bottom', 'left']} // preferred position
+            padding={10} 
+            onClickOutside={() => setIsPopoverOpen(false)}
+            content={(
+              <div className={styles.popoverContent}>
+                <div>知乎热搜</div>
+                <ul className={styles.suggestList}>
+                  <li className={styles.suggestItem}>
+                    肖战参加青春环游记
+                  </li>
+                </ul>
+              </div>
+            )}
+          >
+            <div>
+              <SearchBar 
+                placeholder={placeholder} 
+                onFucus={() => setIsPopoverOpen(true)} 
+                onChange={handleSearchChange} 
+                onSearch={onSearch} 
+              />
+            </div>
+          </Popover>
+        </div>
+        <div className={styles['AppHeader-userInfo']}>
+          <UserInfo />
         </div>
       </div>
     </header>

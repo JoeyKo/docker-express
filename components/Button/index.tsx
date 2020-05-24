@@ -58,6 +58,15 @@ function Button({ className, children, disabled, type, color, onClick, props }: 
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
         }
+
+        .buttonPlain {
+          height: auto;
+          padding: 0;
+          line-height: inherit;
+          background-color: transparent;
+          border: none;
+          border-radius: 0;
+        }
      `}</style>
     </button>
   );
@@ -66,7 +75,7 @@ function Button({ className, children, disabled, type, color, onClick, props }: 
 Button.defaultProps = {
   type: "",
   disabled: false,
-  color: 'blue',
+  color: '',
 };
 
 export default Button;

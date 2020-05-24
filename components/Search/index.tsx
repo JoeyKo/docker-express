@@ -38,7 +38,7 @@ function Search({
         placeholder={placeholder}
         onChange={onChange}
       />
-      <Button type="primary" className={styles.searchButton} onClick={onSearch}>
+      <Button type="primary" color="blue" className={styles.searchButton} onClick={onSearch}>
         <span style={{ display: "inline-flex", alignItems: "center" }}>
           &#8203;
           <svg fill="currentColor" viewBox="0 0 24 24" width="18" height="18">

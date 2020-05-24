@@ -11,7 +11,6 @@ const links = [
 function Layout({ children, title = 'zhihu' }) {
 
   const handleSearch = (event) => {
-    console.log(event)
     router.push('/search')
   }
 
