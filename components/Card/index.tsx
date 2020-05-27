@@ -39,7 +39,7 @@ function Card({
       </div>
       <div className="content">
         <h2 className="contentTitle">
-          <Link href={link}>{title}</Link>
+          <Link href={link}><a>{title}</a></Link>
         </h2>
         <div className="content">{content}</div>
         <div className="actions">{actions}</div>

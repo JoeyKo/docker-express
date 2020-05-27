@@ -1,6 +1,7 @@
 import Card from "../components/Card";
 import Layout from '../components/Layout'
-import Link from "next/link";
+import fetch from 'isomorphic-fetch'
+import { REACT_APP_API_URL } from '../config'
 import styled from 'styled-components'
 
 const TabLink = styled.a`
@@ -9,7 +10,7 @@ display: flex;
 font-size: 16px;
 margin: 0 22px;
 `
-function HomePage() {
+function HomePage({ questions }) {
 
   return (
     <Layout>
@@ -25,12 +26,17 @@ function HomePage() {
                 </nav>
               </div>
               <div className="Topstory-content">
-                <Card
-                  image="https://pic1.zhimg.com/50/v2-3e15293fe39adb63abe58226197d131e_hd.jpg"
-                  link="/"
-                  title="5G 究竟跟我有什么关系？"
-                  content="5G 标准争夺战，到底争的是什么？应用元年，谁能拿下 5G 话语权？5G 标准是未来数字生活的基石，让普通人读懂 5G 与生活，大到行业影响，小到手机购买，5G 不能错过。"
-                />
+                {
+                  questions.map(question => (
+                    <Card
+                      key={question.id}
+                      image="https://pic1.zhimg.com/50/v2-3e15293fe39adb63abe58226197d131e_hd.jpg"
+                      link={`/question/${question.id}`}
+                      title={question.title}
+                      content={question.content}
+                    />
+                  ))
+                }
               </div>
             </div>
          
@@ -72,6 +78,12 @@ function HomePage() {
       </div>
     </Layout>
   );
+}
+
+HomePage.getInitialProps = async () => {
+  const res = await fetch(`${REACT_APP_API_URL}/api/question`)
+  const json = await res.json()
+  return { questions: json.data || [] }
 }
 
 export default HomePage;
