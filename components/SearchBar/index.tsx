@@ -8,10 +8,11 @@ interface Props {
   onSearch?: (event?: any) => void,
   onFucus?: (event?: string) => void,
   onChange?: (value: string) => void,
+  onQuestion?: (value: string) => void,
   placeholder?: string,
 }
 
-function SearchBar({ onSearch, onChange, onFucus, placeholder }: Props) {
+function SearchBar({ onSearch, onChange, onFucus, onQuestion, placeholder }: Props) {
   const [focus, setFocus] = useState(false);
 
   const handleFocus = () => {
@@ -44,6 +45,7 @@ function SearchBar({ onSearch, onChange, onFucus, placeholder }: Props) {
       <Button
         type="primary"
         color="blue"
+        onClick={onQuestion}
         className={classNames({
           [styles.askButton]: true,
           [styles.askHiddenButton]: focus

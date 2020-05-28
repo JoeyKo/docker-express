@@ -42,15 +42,33 @@
   padding: 0 17px;
 }
 
-.popoverContent {
-  min-width: 370px;
+.popover {
+  min-width: 400px;
   min-height: 60px;
-  padding: 15px;
+  padding: 12px 0 7px;
   color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #ebebeb;
   background-color: #fff;
   background-clip: padding-box;
   border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0,0,0,.15) \9;
+  box-shadow: 0 5px 20px rgba(26,26,26,.1);
+}
+
+.popoverTitle {
+  color: #8590a6;
+  font-size: 14px;
+  border-bottom: 1px solid #f6f6f6;
+  padding: 0 15px 7px;
+}
+
+.suggestItem {
+  font-size: 14px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.suggestItem:hover {
+  background-color: #f6f6f6;
 }
 
 .AppHeader-userInfo {
@@ -58,4 +76,60 @@
   justify-content: flex-end;
   display: flex;
   align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  margin-top: 3px;
+  margin-right: 16px;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+
+.titleWrap {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.askTitleInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 3px;
+  max-height: 48px;
+  font-size: 18px;
+  padding: 0!important;
+  height: auto;
+  padding: 6px 12px;
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+}
+
+.questionTitle {
+  flex: 1 1;
+  padding: 0;
+  color: #1a1a1a;
+  font-size: 18px;
+  line-height: 1.34;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background: transparent;
+  border: none;
+  resize: none;
+}
+
+.richText {
+  width: 100%;
+  min-height: 112px;
+  padding: 4px 10px;
+  margin: 15px 0;
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  box-sizing: border-box;
 }

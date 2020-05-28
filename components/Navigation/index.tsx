@@ -5,7 +5,10 @@ import classNames from 'classnames'
 import Popover from 'react-tiny-popover'
 import SearchBar from '../SearchBar';
 import UserInfo from '../UserInfo'
+import Modal from '../Modal';
 import styles from './Navigation.module.css'
+import Button from "../Button";
+import Input from "../Input";
 
 type LinkItem = {
   link: string,
@@ -30,10 +33,20 @@ const TabLink = styled.a`
 
 export default function Navigation({ links, placeholder, onSearch }: Props) {
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
+  const [modalIsOpen,setIsOpen] = React.useState(false);
 
   const handleSearchChange = (text) => {
     setIsPopoverOpen(true)
   }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal(){
+    setIsOpen(false);
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles['header-inner']}>
@@ -71,8 +84,8 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
             padding={10} 
             onClickOutside={() => setIsPopoverOpen(false)}
             content={(
-              <div className={styles.popoverContent}>
-                <div>知乎热搜</div>
+              <div className={styles.popover}>
+                <div className={styles.popoverTitle}>知乎热搜</div>
                 <ul className={styles.suggestList}>
                   <li className={styles.suggestItem}>
                     肖战参加青春环游记
@@ -87,6 +100,7 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
                 onFucus={() => setIsPopoverOpen(true)} 
                 onChange={handleSearchChange} 
                 onSearch={onSearch} 
+                onQuestion={() => setIsOpen(true)}
               />
             </div>
           </Popover>
@@ -95,6 +109,23 @@ export default function Navigation({ links, placeholder, onSearch }: Props) {
           <UserInfo />
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+      >
+        <div className={styles.modalContent}>
+          <div className={styles.titleWrap}>
+            <img src="https://www.joeyko.cn/avatar/5ec3a7dc40f05700352663d0.jpg" alt="avatar" className={styles.avatar} />
+            <label className={styles.askTitleInput}>
+              <textarea placeholder="请输入问题的标题" className={styles.questionTitle}></textarea>
+            </label>
+          </div>
+          <div className={styles.askDetail}>
+            <textarea className={styles.richText}></textarea>
+          </div>
+          <Button type="primary" color="blue">发布问题</Button>
+        </div>
+      </Modal>
     </header>
   );
 }

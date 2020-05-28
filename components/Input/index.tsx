@@ -25,10 +25,6 @@ function Input(props) {
         border: none;
         resize: none;
       }
-
-      input.input:focus {
-        outline: none;
-      }
     `}
     </style>
     </>
